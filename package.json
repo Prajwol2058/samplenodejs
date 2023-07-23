@@ -1,0 +1,18 @@
+{
+  "name": "newexp",
+  "version": "1.0.0",
+  "description": "new file express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sameer",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node": "^20.4.0",
+    "puppeteer": "^20.8.2"
+  }
+}
