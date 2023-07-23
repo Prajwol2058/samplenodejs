@@ -1,11 +1,12 @@
 const bodyParser = require("body-parser");
+const { configDotenv } = require("dotenv");
 const express = require("express");
 const puppeteer = require("puppeteer");
 
 const app = express();
 
 // respond with "hello world" when a GET request is made to the homepage
-
+configDotenv();
 app.use(bodyParser.json());
 app.use("/files", express.static("screenshots"));
 
@@ -40,5 +41,5 @@ app.get("/about", (req, res) => {
   console.log(req);
   res.send("about this app");
 });
-
-app.listen(3000, () => console.log("Listening....."));
+const PORT = process.env.PORT
+app.listen(PORT, () => console.log(`Listening.....${PORT}`));
