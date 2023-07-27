@@ -68,5 +68,14 @@ app.get("/stocks", async (req, res) => {
   res.send(stocks);
 });
 
+app.get("/stocks", async (req, res) => {
+  console.log(req);
+  const client = await connect_DB();
+  //  await can only be used ins async func
+  const stocks = await add_stocks(client);
+  res.send(stocks);
+});
+
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`listening......${PORT}`));

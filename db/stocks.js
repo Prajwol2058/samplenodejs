@@ -22,4 +22,20 @@ async function list_stocks(client) {
   }
 }
 
+async function add_stock(client,stock) {
+    try{
+        await client.connect();
+        const db = client.db("Sampledb");
+        const collection = db.collection("stocks");
+        stock = await collection.insertOne(stock);
+        return stock;
+
+    }
+    catch (e) {
+        console.error(e);
+      } finally {
+        await client.close();
+}
+}
 module.exports = { list_stocks };
+
