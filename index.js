@@ -9,7 +9,7 @@ const { listdbs } = require("./db/databases");
 const { list_stocks, delete_stock } = require("./db/stocks");
 const mongoose = require('mongoose');
 const { Cat } = require("./models/cats");
-
+const { Stock } = require("./models/stocks");
 configDotenv();
 
 // app.use(express.static("screenshots"));
@@ -89,11 +89,48 @@ app.get("/stock", async (req, res) => {
 
 mongoose.connect('mongodb://0.0.0.0:27017/test').then(()=>{console.log("connectedmongodb")}).catch((error)=>{console.log("error")});
 
+app.post("/addcat",async(req,res)=>{
+  console.log(req.body)
+  const kitty = new Cat({ name: req.body.name });
+  kitty.save().then(() => console.log('meow'));
+  res.send(kitty);
+})
+
+app.get("/cats",async(req,res)=>{
+  try{
+    const cats = await Cat.find({});
+  res.send(cats);}
+  catch(err){
+    console.log(err);
+    res.send(err);
+  }
+})
+
 app.get("/addcat",async(req,res)=>{
   const kitty = new Cat({ name: 'Zildjian' });
   kitty.save().then(() => console.log('meow'));
   res.send(kitty);
 })
+
+app.get("/catsbyId",async(req,res)=>{
+  console.log(req.params, "cats");
+  try{
+    const cats = await Cat.findById(req.query.id);
+  res.send(cats);}
+  catch(err){
+    console.log(err);
+    res.send(err);
+  }
+})
+
+app.post("/stock/add",async(req,res)=>{
+  console.log(req.body)
+  const stock= new Stock ({ name: req.body});
+  stock.save().then(() => console.log('stock added'));
+  res.send(stock);
+})
+
+
 
 
 
