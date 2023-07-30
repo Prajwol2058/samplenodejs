@@ -6,7 +6,9 @@ const app = express();
 const puppeteer = require("puppeteer");
 const { connect_DB } = require("./db");
 const { listdbs } = require("./db/databases");
-const { list_stocks } = require("./db/stocks");
+const { list_stocks, delete_stock } = require("./db/stocks");
+const mongoose = require('mongoose');
+const { Cat } = require("./models/cats");
 
 configDotenv();
 
@@ -75,6 +77,24 @@ app.get("/stocks", async (req, res) => {
   const stocks = await add_stocks(client);
   res.send(stocks);
 });
+
+app.get("/stock", async (req, res) => {
+  console.log(req);
+  const client = await connect_DB();
+  //  await can only be used ins async func
+  const stocks = await delete_stock(client);
+  res.send(stocks);
+});
+
+
+mongoose.connect('mongodb://0.0.0.0:27017/test').then(()=>{console.log("connectedmongodb")}).catch((error)=>{console.log("error")});
+
+app.get("/addcat",async(req,res)=>{
+  const kitty = new Cat({ name: 'Zildjian' });
+  kitty.save().then(() => console.log('meow'));
+  res.send(kitty);
+})
+
 
 
 const PORT = process.env.PORT;

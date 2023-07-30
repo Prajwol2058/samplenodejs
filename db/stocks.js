@@ -37,5 +37,21 @@ async function add_stock(client,stock) {
         await client.close();
 }
 }
-module.exports = { list_stocks };
+
+async function delete_stock(client,stock) {
+  try{
+      await client.connect();
+      const db = client.db("Sampledb");
+      const collection = db.collection("stocks");
+      stock = await collection.deleteone(stock);
+      return stock;
+
+  }
+  catch (e) {
+      console.error(e);
+    } finally {
+      await client.close();
+}
+}
+module.exports = { list_stocks, delete_stock };
 
