@@ -36,5 +36,16 @@ const stockremove = expressAsyncHandler (async(req,res)=>{
     }
   });
 
-  module.exports = { createStocks,stockFind, stockremove };
+const stockupdate = expressAsyncHandler (async(req,res)=>{
+    try{
+    const {_id, ...rest} = req.body;
+    const result = await Stock.findByIdAndUpdate(_id,rest);
+    res.send(result);}
+    catch(err){
+      console.log(err);
+      res.send({message: "error updating stocks",err});
+    }
+  });
+
+  module.exports = { createStocks,stockFind, stockremove,stockupdate };
 

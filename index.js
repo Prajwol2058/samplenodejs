@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const { Cat } = require("./models/cats");
 const { Stock } = require("./models/stocks");
 const {Student} = require("./models/students")
-const {createStocks, stockFind, stockremove} = require("./controllers/stocksController")
+const {createStocks, stockFind, stockremove, stockupdate} = require("./controllers/stocksController")
 configDotenv();
 
 // app.use(express.static("screenshots"));
@@ -139,6 +139,7 @@ app.post("/stock/add", createStocks);
 app.get("/stockFind",stockFind);
 
 app.delete("/stock/:id",stockremove);
+app.put("/stock",stockupdate);
 
 
 
