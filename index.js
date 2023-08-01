@@ -10,6 +10,7 @@ const { list_stocks, delete_stock } = require("./db/stocks");
 const mongoose = require('mongoose');
 const { Cat } = require("./models/cats");
 const { Stock } = require("./models/stocks");
+const {Student} = require("./models/students")
 configDotenv();
 
 // app.use(express.static("screenshots"));
@@ -125,10 +126,21 @@ app.get("/catsbyId",async(req,res)=>{
 
 app.post("/stock/add",async(req,res)=>{
   console.log(req.body)
-  const stock= new Stock ({ name: req.body});
+  const stock= new Stock ( req.body);
   stock.save().then(() => console.log('stock added'));
   res.send(stock);
 })
+
+app.post("/student",async(req,res)=>{
+  console.log(req.body)
+  const student = new Student(req.body);
+  student.save().then(()=>console.log("student admitted"));
+  res.send(student);
+
+
+})
+
+
 
 
 
