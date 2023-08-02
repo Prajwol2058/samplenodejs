@@ -36,4 +36,15 @@ const findFlight = expressAsyncHandler (async(req,res)=>{
     }
   });
 
-module.exports = {addFlight, findFlight, flightremove};
+  const flightupdate = expressAsyncHandler (async(req,res)=>{
+    try{
+    const {_id, ...rest} = req.body;
+    const result = await Flight.findByIdAndUpdate(_id,rest);
+    res.send(result);}
+    catch(err){
+      console.log(err);
+      res.send({message: "error updating flight records",err});
+    }
+  });
+
+module.exports = {addFlight, findFlight, flightremove, flightupdate};

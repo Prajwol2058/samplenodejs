@@ -16,6 +16,7 @@ const { stockRouter } = require("./Routers/stocksRouter");
 const { addFlight } = require("./controllers/flightsController");
 const { findFlight } = require("./controllers/flightsController");
 const { flightremove } = require("./controllers/flightsController");
+const { flightupdate } = require("./controllers/flightsController");
 configDotenv();
 
 // app.use(express.static("screenshots"));
@@ -151,6 +152,7 @@ app.route("/stocks",stockRouter);
 app.post("/flight/add", addFlight);
 app.get("/flight/find", findFlight);
 app.delete("/flight/delete/:id",flightremove);
+app.put("/flight/update",flightupdate);
 
 
 
