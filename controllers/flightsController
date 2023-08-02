@@ -24,4 +24,16 @@ const findFlight = expressAsyncHandler (async(req,res)=>{
     }
   });
 
-module.exports = {addFlight, findFlight};
+
+  const flightremove = expressAsyncHandler (async(req,res)=>{
+    try{
+    const id = req.params.id;
+    const value = await Flight.findByIdAndDelete(id);
+    res.send(value);}
+    catch(err){
+      console.log(err);
+      res.send({message: "error deleting flight records",err});
+    }
+  });
+
+module.exports = {addFlight, findFlight, flightremove};
