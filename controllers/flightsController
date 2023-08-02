@@ -1,0 +1,16 @@
+const expressAsyncHandler = require("express-async-handler");
+const { Flight } = require("../models/flightreservation");
+
+const addFlight = expressAsyncHandler(async(req,res)=>{
+try{console.log(req.body)
+    const flight = new Flight(req.body);
+    flight.save().then(()=> console.log('Flight reserved'));
+    res.send(flight);
+
+}catch(err){
+    console.log(err);
+    res.send({message: "error reserving flight",err})
+}
+})
+
+module.exports = {addFlight};

@@ -11,7 +11,9 @@ const mongoose = require('mongoose');
 const { Cat } = require("./models/cats");
 const { Stock } = require("./models/stocks");
 const {Student} = require("./models/students")
-const {createStocks, stockFind, stockremove, stockupdate} = require("./controllers/stocksController")
+const {createStocks, stockFind, stockremove, stockupdate} = require("./controllers/stocksController");
+const { stockRouter } = require("./Routers/stocksRouter");
+const { addFlight } = require("./controllers/flightsController");
 configDotenv();
 
 // app.use(express.static("screenshots"));
@@ -140,6 +142,13 @@ app.get("/stockFind",stockFind);
 
 app.delete("/stock/:id",stockremove);
 app.put("/stock",stockupdate);
+
+app.route("/stocks",stockRouter);
+
+
+app.post("/flight/add", addFlight);
+
+
 
 
 
