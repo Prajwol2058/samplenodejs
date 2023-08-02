@@ -4,7 +4,7 @@ const { Stock } = require('../models/stocks');
 const createStocks =  expressAsyncHandler(async(req,res)=>{
     try{console.log(req.body)
     const stock= new Stock( req.body);
-    stock.save().then(() => console.log('stock added'));
+    await stock.save().then(() => console.log('stock added'));
     res.send(stock);
     }catch(err){
         console.log(err);

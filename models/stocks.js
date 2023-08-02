@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const stockSchema = new Schema({
-  securityId: String, // String is shorthand for {type: String}
-  securityName: String,
-  symbol: String,
+  securityId: {type:String,
+    unique: true}, // String is shorthand for {type: String}
+  securityName:{ type:String, unique:true},
+  symbol: {type:String,unique:true},
   indexId: Number,
-  totalTradeQuantity: Number,
-  lastTradedPrice : Number,
+  totalTradeQuantity: {type:Number, default:0},
+  lastTradedPrice : {type:Number, required: true},
   percentageChange : Number,
   lastUpdatedDateTime : Date,
   previousClose : Number,
