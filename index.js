@@ -14,6 +14,7 @@ const {Student} = require("./models/students")
 const {createStocks, stockFind, stockremove, stockupdate} = require("./controllers/stocksController");
 const { stockRouter } = require("./Routers/stocksRouter");
 const { addFlight } = require("./controllers/flightsController");
+const { findFlight } = require("./controllers/flightsController");
 configDotenv();
 
 // app.use(express.static("screenshots"));
@@ -147,6 +148,7 @@ app.route("/stocks",stockRouter);
 
 
 app.post("/flight/add", addFlight);
+app.get("/flight/find", findFlight)
 
 
 
