@@ -18,6 +18,9 @@ const { findFlight } = require("./controllers/flightsController");
 const { flightremove } = require("./controllers/flightsController");
 const { flightupdate } = require("./controllers/flightsController");
 const { flightRouter } = require("./Routers/flightRouters");
+const { abcd } = require("./middlewares/sampleMiddleWare");
+const { requestTimer } = require("./middlewares/requestTimer,js");
+const { check } = require("./middlewares/enoughPrice");
 configDotenv();
 
 // app.use(express.static("screenshots"));
@@ -147,7 +150,7 @@ app.post("/student",async(req,res)=>{
 //app.delete("/stock/:id",stockremove);
 //app.put("/stock",stockupdate);
 
-app.use("/stocks",stockRouter); 
+app.use("/stocks",check,stockRouter); 
 
 
 //app.post("/flight/add", addFlight);
