@@ -1,0 +1,50 @@
+const expressAsyncHandler = require("express-async-handler");
+const { Flight } = require("../models/flightreservation");
+
+const addFlight = expressAsyncHandler(async(req,res)=>{
+try{console.log(req.body)
+    const flight = new Flight(req.body);
+    flight.save().then(()=> console.log('Flight reserved'));
+    res.send(flight);
+
+}catch(err){
+    console.log(err);
+    res.send({message: "error reserving flight",err})
+}
+})
+
+const findFlight = expressAsyncHandler (async(req,res)=>{
+    try{
+        console.log(req.body)
+      const flight = await Flight.find({});
+    res.send(flight);}
+    catch(err){
+      console.log(err);
+      res.send({message: "error finding flight",err});
+    }
+  });
+
+
+  const flightremove = expressAsyncHandler (async(req,res)=>{
+    try{
+    const id = req.params.id;
+    const value = await Flight.findByIdAndDelete(id);
+    res.send(value);}
+    catch(err){
+      console.log(err);
+      res.send({message: "error deleting flight records",err});
+    }
+  });
+
+  const flightupdate = expressAsyncHandler (async(req,res)=>{
+    try{
+    const {_id, ...rest} = req.body;
+    const result = await Flight.findByIdAndUpdate(_id,rest);
+    res.send(result);}
+    catch(err){
+      console.log(err);
+      res.send({message: "error updating flight records",err});
+    }
+  });
+
+module.exports = {addFlight, findFlight, flightremove, flightupdate};
